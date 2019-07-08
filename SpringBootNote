@@ -1,0 +1,5 @@
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
+
+20. Developer Tools
+	spring-boot-devtools 为开发者提供许多方便的舒适的开发环境。
+	当你使用 java -jar 命令启动应用时，spring-boot-devtools 会认为应用处于生产环境而不启用，或者你可以使用 -Dspring.devtools.restart.enabled=false 配置手动关闭 spring-boot-devtools。
