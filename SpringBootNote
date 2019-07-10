@@ -3,3 +3,32 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 20. Developer Tools
 	spring-boot-devtools 为开发者提供许多方便的舒适的开发环境。
 	当你使用 java -jar 命令启动应用时，spring-boot-devtools 会认为应用处于生产环境而不启用，或者你可以使用 -Dspring.devtools.restart.enabled=false 配置手动关闭 spring-boot-devtools。
+	spring-boot-devtools 会监听所有 classpath 下的任何改动，并在 class 文件发生变化后进行程序的热部署。
+	通过配置 spring.devtools.restart.trigger-file，可以指定在某个文件修改之后触发项目重启。
+	
+	spring-boot-devtools 可以让你方便地进行远程热部署。首先将 devtools 包含在打包插件中
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<excludeDevtools>false</excludeDevtools>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	然后为你的项目设置一个密码 spring.devtools.remote.secret=mysecret。项目直接部署在远程服务器上。
+	本地 IDE 中新建 Java Application 启动器，选择相应的 Module，以 org.springframework.boot.devtools.RemoteSpringApplication 作为启动类，远程服务器地址作为启动参数。你在本地环境的任何修改将被同步推送到远程服务中，如果需要的话，还会触发服务重启。
+
+23.5 Application Events and Listeners
+	在 SpringBoot 启动的之前，可以通过 SpringApplication.addListeners 设置自己的 ApplicationListener 来监听 SpringBoot 初始化过程中的各种事件，常见的 SpringBoot 的启动事件顺序是：
+	ApplicationStartingEvent —— SpringBoot 开始运行，除了注册监听器和初始化模块，还没有运行任何进程
+	ApplicationEnvironmentPreparedEvent —— 上下文环境已知但上下文被创建之前
+	ApplicationPreparedEvent —— Sprint bean 已经加载但上下文刷新开始之前
+	ApplicationStartedEvent —— 上下文刷新之后但还没有运行任何应用和命令行
+	ApplicationReadyEvent —— 所有应用和命令行运行完毕，表明程序已经准备好进行服务
+	ApplicationFailedEvent —— 如果启动过程中有异常发生
+
+——————————————————————————————————————————————————————————————————————————
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-web-environment
