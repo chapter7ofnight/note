@@ -30,5 +30,32 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 	ApplicationReadyEvent —— 所有应用和命令行运行完毕，表明程序已经准备好进行服务
 	ApplicationFailedEvent —— 如果启动过程中有异常发生
 
+23.8 Using the ApplicationRunner or CommandLineRunner
+	通过实现 ApplicationRunner 或 CommandLineRunner 接口的 bean，可以在 SpringApplication 启动之后执行指定的代码。当有多个 ApplicationRunner 或 CommandLineRunner 的 bean 时，通过 org.springframework.core.annotation.Order 指定顺序。
+
+23.9 Application Exit
+	调用 SpringApplication.exit(ApplicationContext context, ExitCodeGenerator... exitCodeGenerators) 方法可以优雅地结束 ApplicationContext。
+
+24. Externalized Configuration
+	SpringBoot 使用以下顺序去设置一个属性的值：
+	1. 当 devtools 可用时，~/.spring-boot-devtools.properties 配置文件
+	2. 在测试时，使用 @TestPropertySource 注解的值
+	3. 当测试时，测试目录下的 properties 配置文件
+	4. 命令行参数，以 -- 开头
+	5. SPRING_APPLICATION_JSON 设置的属性
+	6. ServletConfig 初始化参数
+	7. ServletContext 初始化参数
+	8. 来自于 java:comp/env 的 JNDI 属性
+	9. System.getProperties()
+	10. 操作系统环境变量
+	11. 使用 random.* 指定的随机数，取值参考 RandomValuePropertySource
+	12. Jar 包外部指定的 application-{profile}.properties 配置文件
+	13. Jar 包内部指定的 application-{profile}.properties 配置文件
+	14. Jar 包外部指定的 application.properties 配置文件
+	15. Jar 包内部指定的 application.properties 配置文件
+	16. @Configuration 注解的类以 @PropertySource 注解指定的配置文件
+	17. 默认配置
+	
+	可以使用 java -jar app.jar --key="value" 的启动方式指定参数，也可以使用 SPRING_APPLICATION_JSON='{"acme":{"name":"test"}}' java -jar myapp.jar，java -Dspring.application.json='{"name":"test"}' -jar myapp.jar 或 java -jar myapp.jar --spring.application.json='{"name":"test"}' 的方式，通过 json 来设置属性值。
 ——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-web-environment
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-external-config-yaml
