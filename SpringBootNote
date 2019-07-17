@@ -58,4 +58,4 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 	
 	可以使用 java -jar app.jar --key="value" 的启动方式指定参数，也可以使用 SPRING_APPLICATION_JSON='{"acme":{"name":"test"}}' java -jar myapp.jar，java -Dspring.application.json='{"name":"test"}' -jar myapp.jar 或 java -jar myapp.jar --spring.application.json='{"name":"test"}' 的方式，通过 json 来设置属性值。
 ——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-external-config-yaml
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-profiles
