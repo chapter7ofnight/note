@@ -57,5 +57,12 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 	17. 默认配置
 	
 	可以使用 java -jar app.jar --key="value" 的启动方式指定参数，也可以使用 SPRING_APPLICATION_JSON='{"acme":{"name":"test"}}' java -jar myapp.jar，java -Dspring.application.json='{"name":"test"}' -jar myapp.jar 或 java -jar myapp.jar --spring.application.json='{"name":"test"}' 的方式，通过 json 来设置属性值。
+
+29.1.3 Custom JSON Serializers and Deserializers
+	使用 @JsonComponent 注解一个类，在内部定义 JsonSerializer<T> 和 JsonDeserializer<T> 的子类，实现自定义的 JSON 序列化和反序列化。
+
+29.1.11 Error Handling
+	通过一个 ErrorController 的实现类，可以定义一个监听 /error 的接口，从而实现定制化的错误返回（如果直接监听接口而不实现这个类的话，SpringBoot 启动时会报错，因为在 BasicErrorController 中已经对这个路径进行了监听）。也可以定义一个继承自 BasicErrorController 的类，再定义一个 @RequestMapping 的方法，同时制定一个不同于 text/html 的 produces 属性（BasicErrorController 中的 error 方法会返回  text/html 格式的数据，不能和它重复）。
+	RequestMapping 注解中，有 consumes 和 produces 两个属性。consumes 指定服务器处理请求时，客户端应该传的数据的类型（headers 中的 Content-Type）。produces 指定服务器处理请求后，客户端可以接受的数据类型（headers 中的 Accept）。
 ——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-security
