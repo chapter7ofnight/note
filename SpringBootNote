@@ -71,5 +71,12 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 	2、Tomcat pooling DataSource
 	3、Commons DBCP2
 	使用 spring.datasource.hikari.*、spring.datasource.tomcat.*、spring.datasource.dbcp2.* 去设置特定的 datastore 实现的属性
+
+33. Caching
+    在启动类上使用 @EnableCaching 注解可以开启 SpringBoot 缓存模式，在 Spring Bean 的方法或类上使用 @Cacheable 注解可以使该方法或该类的所有方法成为缓存方法。Spring 会根据方法参数或通过自定义的方式生成缓存的 key，并把方法返回值作为 value 缓存起来。
+	通过引入 spring-boot-starter-cache 依赖可以添加一个基本的 cache 依赖到项目中。
+	如果项目中包含 Redis，SpringBoot 会自动配置一个 RedisCacheManager，使缓存数据可以存到 Redis 上。
+	使用 spring.cache.cache-names=cache1,cache2 可以指定仅仅创建和使用哪些缓存，而不是在需要时任意创建。
+	使用 spring.cache.type=none 禁用缓存。
 ——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-caching
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-messaging
