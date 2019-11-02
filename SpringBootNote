@@ -78,5 +78,8 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 	如果项目中包含 Redis，SpringBoot 会自动配置一个 RedisCacheManager，使缓存数据可以存到 Redis 上。
 	使用 spring.cache.cache-names=cache1,cache2 可以指定仅仅创建和使用哪些缓存，而不是在需要时任意创建。
 	使用 spring.cache.type=none 禁用缓存。
+
+34. Messaging
+	Spring Boot 可以方便地计入多种消息中间件。如：使用 JMS 抽象，利用 JmsTemplate 模版来使用统一的消息发送，利用 @JmsListener 注解来接受消息。支持 ActiveMQ 和 Artemis。使用 Advanced Message Queuing Protocol (AMQP) 接入 RabbitMQ。使用 spring-kafka 方便地与 kafka 服务器进行通信。利用 KafkaTemplate 和 @KafkaListener 可以快速地发送和接受 kafka 消息。
 ——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-messaging
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-resttemplate
