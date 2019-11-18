@@ -81,5 +81,34 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
 
 34. Messaging
 	Spring Boot 可以方便地计入多种消息中间件。如：使用 JMS 抽象，利用 JmsTemplate 模版来使用统一的消息发送，利用 @JmsListener 注解来接受消息。支持 ActiveMQ 和 Artemis。使用 Advanced Message Queuing Protocol (AMQP) 接入 RabbitMQ。使用 spring-kafka 方便地与 kafka 服务器进行通信。利用 KafkaTemplate 和 @KafkaListener 可以快速地发送和接受 kafka 消息。
+
+37. Validation
+    当 JSR-303 的实现（如：Hibernate validator）在 classpath 的时候，基于 Bean Validation 1.1 的方法校验的功能自动可用。javax.validation 包下的注解可以约束参数和返回值。需要使用 @Validated 对类进行注解。
+
+38. Sending Email
+    引入 spring-boot-starter-mail 包并配置 spring.mail.host 属性，可以方便地使用 JavaMailSender 发送邮件。
+
+39. Distributed Transactions with JTA
+    SpringBoot 可以集成多种事务管理器，包括 Atomikos 和 Bitronix 等。
+
+40. Hazelcast
+    Hazelcast 是一个基于内存的数据网格开源项目，当集群中的一个节点修改某一部分内存数据时，其他节点的内存中的数据也会被修改。可以用于实现同一个服务多个实例需要共享同一份数据的功能（例如 session 管理、数据缓存等）。
+
+41. Quartz Scheduler
+    使用 Quartz Scheduler 可以方便地管理定时任务。默认使用内存型的定时任务，也可以配置从数据库读取定时任务配置信息，以达到动态控制定时任务和集群共享的目的。
+
+42. Task Execution and Scheduling
+    可以自定义异步线程执行器
+
+43. Spring Integration
+    Spring Integration 是一个功能强大的EIP(Enterprise Integration Patterns，企业集成模式)，是一种便捷的可以在系统之间做消息传递的事件驱动消息框架。Message 用于封装消息，包括 Hearder 和 Payload 两部分；MessageChannel 可以使用不同的方式来发送接收消息；Message Endpoint 可以对消息进行一些如转换、过滤、路由等操作；Channel Interceptor 可以在消息各个阶段进行拦截。
+
+44. Spring Session
+    Spring Session 模块可以方便地管理 Session，并且可以配置保存 session 的位置，包括 JDBC、Redis、Hazelcast、MongoDB 等。
+
+46.3 Testing Spring Boot Applications
+    使用 @Transactional 注解测试方法，可以在测试方法结束之前进行事务回滚，但使用 RANDOM_PORT，DEFINED_PORT 模式启动的模式不能进行回滚，因为 SpringBoot 创建了真实的 web server。
+    使用 MockMvc 或 WebTestClient 可以方便地对 controller 进行测试。MockMvc 可以使用 @Autowired 注入，WebTestClient 对测试类进行注解，可以仅仅扫描 controller 层的 beans。
+    使用 MockRestServiceServer 可以模拟一个 web 服务端，以便对 REST Clients 进行测试。
 ——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#boot-features-resttemplate
+https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#production-ready
