@@ -110,5 +110,17 @@ https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle
     使用 @Transactional 注解测试方法，可以在测试方法结束之前进行事务回滚，但使用 RANDOM_PORT，DEFINED_PORT 模式启动的模式不能进行回滚，因为 SpringBoot 创建了真实的 web server。
     使用 MockMvc 或 WebTestClient 可以方便地对 controller 进行测试。MockMvc 可以使用 @Autowired 注入，WebTestClient 对测试类进行注解，可以仅仅扫描 controller 层的 beans。
     使用 MockRestServiceServer 可以模拟一个 web 服务端，以便对 REST Clients 进行测试。
-——————————————————————————————————————————————————————————————————————————
-https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/htmlsingle/#production-ready
+
+
+53. Endpoints
+    引入 spring-boot-starter-actuator 组件，可以方便地对 SpringBoot 程序进行监控。除了 shutdown，其他功能默认是开启状态。使用 management.endpoint.<id>.enabled 属性可以控制 endpoint 的状态。使用 management.endpoints.jmx/web.exposure.exclude/include 可以控制 endpoint 接口是否暴露，exclude 优先。注册自己的 EndpointFilter bean 可以实现自己的暴露 endpoint 的逻辑。
+    通过 management.endpoint.health.show-details 参数可以设置是否可以查看程序健康状态的详细信息，这些信息收集自 HealthIndicator 的实现类。
+
+56. Loggers
+    SpringBoot Actuator 可以动态修改 logger level。
+
+57.3 Supported Metrics
+    SpringBoot 支持对一系列的机器、服务指标进行监控，可以访问 /actuator/metrics 接口查看有哪些指标。
+
+59. HTTP Tracing
+    调用 /actuator/httptrace 接口可以查看最近 100 次 http 请求。
