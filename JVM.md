@@ -94,21 +94,21 @@ b）老年代：经历过多次 Minor GC 后仍存在的对象，或者 Minor GC
 
 volatile 关键字保证 load 和 use 必须连续进行，assign 和 store 必须连续进行，从而保证了数据的可见性。防止指令重排序优化，内存屏障。
 
-​		LoadLoad：后续读之前，前面的读完毕；放在读操作后面
+​		LoadLoad：后续读之前，前面的读完毕；放在读操作后面，保证 volatile 读先于靠后位置的读。
 
-​		StoreStore：后续写之前，前面的写完毕；放在写操作前面
+​		StoreStore：后续写之前，前面的写完毕；放在写操作前面，保证靠前位置的写先于 volatile 写。
 
-​		LoadStore：后续写之前，前面的读完毕；放在读操作后面
+​		LoadStore：后续写之前，前面的读完毕；放在读操作后面，保证 volatile 读先于靠后位置的写。
 
-​		StoreLoad：后续读之前，前面的写完毕；放在写操作后面
+​		StoreLoad：后续读之前，前面的写完毕；放在写操作后面，保证 volatile 写先于靠后位置的读。
 
 ##### 3、原子性、可见性和有序性
 
 ​		原子性：read、load、use、assign、store、write；synchronized 通过 monitorenter 和 monitorexit 锁来保证原子性。
 
-​		可见性：volatile；synchronized 通过 unlock 的语义保证原子性；final 不可变。
+​		可见性：volatile；synchronized 通过 unlock 的语义保证可见性；final 不可变。
 
-​		有序性：volatile；synchronized 通过 lock 的语义保证有序性。
+​		有序性：volatile；synchronized 通过 lock 的语义保证一个时刻只有一个线程对变量执行 lock，使持有同一个锁的两个代码块只能串行进入，从而保证有序性。
 
 ##### 4、先行发生原则
 
